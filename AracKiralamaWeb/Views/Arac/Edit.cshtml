@@ -1,0 +1,128 @@
+﻿@model AracKiralamaWeb.Models.Arac
+
+@{
+    ViewData["Title"] = "Aracı Düzenle";
+}
+
+<style>
+    /* Animasyon */
+    .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Glassmorphism Kart */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    /* Başlık Kısmı (Turuncu Tema - Düzenleme Olduğu İçin) */
+    .card-header-edit {
+        background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
+        padding: 30px;
+        color: white;
+        text-align: center;
+        border-bottom: 5px solid #e67e22;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 2px solid #eee;
+    }
+
+        .form-control:focus {
+            border-color: #f39c12; /* Turuncu odak rengi */
+            box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.1);
+        }
+
+    /* Butonlar */
+    .btn-update {
+        background: linear-gradient(45deg, #f1c40f, #f39c12);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        transition: transform 0.2s;
+    }
+
+        .btn-update:hover {
+            transform: translateY(-3px);
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.4);
+        }
+</style>
+
+<div class="container mt-5 mb-5 fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+
+            <div class="glass-card">
+                <div class="card-header-edit">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">✏️</div>
+                    <h3 class="fw-bold mb-0">Araç Bilgilerini Güncelle</h3>
+                    <p class="text-white-50 mb-0 mt-2">"@Model.MarkaModel" aracını düzenliyorsunuz.</p>
+                </div>
+
+                <div class="card-body p-5">
+                    <form asp-action="Edit" method="post">
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-muted small text-uppercase">Marka & Model</label>
+                                <input asp-for="MarkaModel" class="form-control" placeholder="Örn: Fiat Egea" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-muted small text-uppercase">Plaka</label>
+                                <input asp-for="Plaka" class="form-control" placeholder="34 ABC 123" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-muted small text-uppercase">Günlük Fiyat (TL)</label>
+                            <div class="input-group">
+                                <span class="input-group-text fw-bold">₺</span>
+                                <input asp-for="GunlukFiyat" type="number" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <label class="form-label fw-bold text-muted small text-uppercase">Resim Yolu</label>
+                            <input asp-for="ResimUrl" class="form-control" placeholder="araba.jpg" />
+                            <div class="form-text mt-2">
+                                <i class="fas fa-info-circle text-warning"></i> Sadece dosya adını yazın (Örn: focus.jpg)
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-update btn-lg py-3 rounded-pill shadow">
+                                <i class="fas fa-save me-2"></i> DEĞİŞİKLİKLERİ KAYDET
+                            </button>
+                            <a asp-action="Index" class="btn btn-light py-2 rounded-pill border">
+                                Vazgeç
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

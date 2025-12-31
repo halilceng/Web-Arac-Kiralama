@@ -1,0 +1,228 @@
+﻿@model AracKiralamaWeb.Models.Arac
+
+@{
+    ViewData["Title"] = "Rezervasyon Yap";
+}
+
+<style>
+    /* Sol Taraf: Form Kartı */
+    .form-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+    }
+
+    /* Sağ Taraf: Özet Kartı (Sticky) */
+    .summary-card {
+        background: linear-gradient(145deg, #2c3e50, #1a252f); /* Koyu Tema */
+        color: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 35px rgba(44, 62, 80, 0.3);
+        position: sticky;
+        top: 100px; /* Aşağı kaydırınca sabit kalsın */
+    }
+
+    /* Araç Resmi (Özet Kartında) */
+    .summary-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    /* Fiyat Alanı */
+    .price-display {
+        background: rgba(255,255,255,0.1);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .total-amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #e63946; /* Marka Kırmızısı */
+    }
+
+    /* Input Odaklanma */
+    .form-control:focus {
+        border-color: #e63946;
+        box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.1);
+    }
+
+    /* Animasyon */
+    .fade-in {
+        animation: fadeIn 0.8s ease;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="container py-5 fade-in">
+
+    <div class="mb-5">
+        <a asp-action="Index" class="text-decoration-none text-muted mb-2 d-inline-block">
+            <i class="fas fa-arrow-left"></i> Araçlara Dön
+        </a>
+        <h2 class="fw-bold">Rezervasyonunu Tamamla 🏁</h2>
+        <p class="text-muted">Seçtiğiniz araç için son bir adım kaldı.</p>
+    </div>
+
+    <form asp-action="Kirala" method="post">
+        <div class="row">
+
+            <div class="col-lg-8 mb-4">
+                <div class="form-card">
+                    <h4 class="fw-bold mb-4 text-dark"><i class="fas fa-user-edit me-2 text-danger"></i>Sürücü Bilgileri</h4>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-muted">ADINIZ</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Adınız" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold small text-muted">SOYADINIZ</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Soyadınız" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small text-muted">E-POSTA ADRESİ</label>
+                        <input type="email" class="form-control" placeholder="ornek@gmail.com" required>
+                    </div>
+
+                    <hr class="my-5 opacity-25">
+
+                    <h4 class="fw-bold mb-4 text-dark"><i class="fas fa-calendar-alt me-2 text-danger"></i>Kiralama Tarihleri</h4>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-success">ALIŞ TARİHİ</label>
+                            <input type="date" name="BaslangicTarihi" id="alisTarihi" class="form-control form-control-lg border-success" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-danger">İADE TARİHİ</label>
+                            <input type="date" name="BitisTarihi" id="iadeTarihi" class="form-control form-control-lg border-danger" required>
+                        </div>
+                    </div>
+
+                    <div id="dateAlert" class="alert alert-warning mt-3 d-none">
+                        <i class="fas fa-exclamation-triangle"></i> İade tarihi, alış tarihinden önce olamaz!
+                    </div>
+
+                    @if (TempData["Hata"] != null)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @TempData["Hata"]
+                        </div>
+                    }
+
+                    <input type="hidden" name="Plaka" value="@Model.Plaka" />
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="summary-card">
+                    <h5 class="fw-bold mb-3">Seçilen Araç</h5>
+
+                    <img src="@(string.IsNullOrEmpty(Model.ResimUrl) ? "/images/default-car.jpg" : "/images/" + Model.ResimUrl)"
+                         class="summary-img" alt="Araba">
+
+                    <h3 class="fw-bold">@Model.MarkaModel</h3>
+                    <div class="badge bg-light text-dark mb-3"><i class="fas fa-fingerprint"></i> @Model.Plaka</div>
+
+                    <div class="d-flex justify-content-between mt-3 text-white-50">
+                        <span>Günlük Fiyat:</span>
+                        <span class="text-white">@Model.GunlukFiyat ₺</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-2 text-white-50">
+                        <span>Kiralama Süresi:</span>
+                        <span class="text-white"><span id="gunSayisiSpan">0</span> Gün</span>
+                    </div>
+
+                    <hr class="border-secondary">
+
+                    <div class="price-display">
+                        <small class="text-uppercase text-muted fw-bold">Ödenecek Tutar</small>
+                        <div class="total-amount">
+                            <span id="toplamTutarSpan">0</span> ₺
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger w-100 btn-lg mt-4 fw-bold shadow">
+                        REZERVASYONU ONAYLA <i class="fas fa-check-circle ms-2"></i>
+                    </button>
+
+                    <div class="text-center mt-3 small text-white-50">
+                        <i class="fas fa-lock"></i> Ödemeniz 256-bit SSL ile korunmaktadır.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script>
+    // 1. Gerekli Elemanları Seç
+    const alisInput = document.getElementById('alisTarihi');
+    const iadeInput = document.getElementById('iadeTarihi');
+    const gunSayisiSpan = document.getElementById('gunSayisiSpan');
+    const toplamTutarSpan = document.getElementById('toplamTutarSpan');
+    const alertBox = document.getElementById('dateAlert');
+
+    // Modelden gelen günlük fiyatı JS değişkenine al
+    const gunlukFiyat = @Model.GunlukFiyat;
+
+    // 2. Hesaplama Fonksiyonu
+    function hesapla() {
+        // Tarihleri al
+        const alisDate = new Date(alisInput.value);
+        const iadeDate = new Date(iadeInput.value);
+
+        // Tarihler geçerli mi kontrol et
+        if (alisInput.value && iadeInput.value) {
+
+            // Zaman farkını bul (milisaniye cinsinden)
+            const fark = iadeDate - alisDate;
+
+            // Gün sayısına çevir (1000ms * 60sn * 60dk * 24sa)
+            let gunSayisi = fark / (1000 * 60 * 60 * 24);
+
+            if (gunSayisi <= 0) {
+                // Hatalı tarih seçimi
+                alertBox.classList.remove('d-none'); // Uyarıyı göster
+                gunSayisiSpan.innerText = "0";
+                toplamTutarSpan.innerText = "0";
+            } else {
+                // Doğru seçim
+                alertBox.classList.add('d-none'); // Uyarıyı gizle
+
+                // Ekrana yaz
+                gunSayisiSpan.innerText = gunSayisi;
+                toplamTutarSpan.innerText = (gunSayisi * gunlukFiyat).toLocaleString('tr-TR'); // Para formatında yaz (1.500 gibi)
+            }
+        }
+    }
+
+    // 3. Her iki tarih değiştiğinde de hesapla fonksiyonunu çalıştır
+    alisInput.addEventListener('change', hesapla);
+    iadeInput.addEventListener('change', hesapla);
+
+</script>

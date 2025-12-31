@@ -1,0 +1,471 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/* --- ANA SAYFA ÖZEL TASARIMI --- */
+
+/* 1. Hero Alaný (Arka Plan) */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    border-radius: 0 0 50px 50px;
+    position: relative;
+}
+
+/* 2. Özel Buton Tasarýmý */
+.btn-premium {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    z-index: 1;
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+}
+
+    .btn-premium:hover {
+        background-color: #ff0a1f;
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(230, 57, 70, 0.8);
+        color: white;
+    }
+
+    .btn-premium span {
+        display: inline-block;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-premium:hover span {
+        transform: translateX(8px);
+    }
+
+/* Animasyon Tanýmlarý */
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(230, 57, 70, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+    }
+}
+
+.btn-animate {
+    animation: pulse-red 2s infinite;
+}
+
+/* Kart Efektleri */
+.feature-card {
+    transition: all 0.3s ease;
+    border: none;
+    background: #fff;
+}
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+
+/* Harf Aralýðý Yardýmcýsý */
+.ls-2 {
+    letter-spacing: 2px;
+}
+
+/* --- ALT ÇAÐRI ALANI (CTA) ÖZEL TASARIMI --- */
+.cta-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); /* Daha zengin bir koyu arka plan */
+}
+
+/* Arka plan ýþýk efektleri */
+.cta-bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: 0;
+    animation: float-glow 10s infinite alternate ease-in-out;
+}
+
+.glow-1 {
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: rgba(230, 57, 70, 0.6); /* Kýrmýzýmsý ýþýk */
+}
+
+.glow-2 {
+    bottom: -100px;
+    right: -100px;
+    width: 250px;
+    height: 250px;
+    background: rgba(52, 152, 219, 0.4); /* Mavimsi ýþýk */
+    animation-delay: -5s; /* Farklý zamanda baþlasýn */
+}
+
+/* Iþýklarýn yüzme animasyonu */
+@keyframes float-glow {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(50px, 50px) scale(1.2);
+    }
+}
+
+/* Ýçeriklerin ýþýklarýn üzerinde kalmasýný saðlar */
+.z-1 {
+    z-index: 1;
+}
+
+/* Buton hover efekti (ana sayfadaki ile uyumlu) */
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+/* --- NAVBAR (MENÜ) TASARIMI --- */
+
+/* Menü Arka Planý (Koyu Gradyan) */
+.custom-navbar {
+    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364); /* Premium koyu tonlar */
+    padding: 15px 0; /* Menüyü biraz geniþlet */
+}
+
+/* Linklerin Yazý Tipi */
+.navbar-brand {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Linklerin Üzerine Gelince (Hover) Efekti */
+.nav-hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+    position: relative;
+    transition: color 0.3s ease;
+    margin-right: 15px;
+}
+
+    .nav-hover:hover {
+        color: #ffffff !important; /* Parlak beyaz */
+    }
+
+    /* Linklerin Altýndaki Kayan Çizgi Animasyonu */
+    .nav-hover::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #e63946; /* Temamýza uygun kýrmýzý */
+        transition: width 0.3s ease;
+    }
+
+    .nav-hover:hover::after {
+        width: 100%;
+    }
+
+/* Admin Butonu Hover Efekti */
+.btn-outline-light:hover {
+    background-color: #e63946;
+    border-color: #e63946;
+    transform: scale(1.05); /* Hafif büyüme */
+    transition: all 0.3s ease;
+}
+
+/* --- FOOTER (ALT BÝLGÝ) TASARIMI --- */
+
+.custom-footer {
+    background-color: #1a1a1a; /* Koyu Gri/Siyah Premium Ton */
+    color: #b0b0b0; /* Yazýlar hafif gri olsun, göz yormasýn */
+    font-size: 0.9rem;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Yukarý doðru hafif gölge */
+}
+
+/* Link Efektleri */
+.footer-link {
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+    .footer-link:hover {
+        color: #e63946 !important; /* Üzerine gelince Marka Kýrmýzýsý olsun */
+        transform: translateX(5px); /* Hafifçe saða kaysýn */
+    }
+
+/* Sosyal Medya Butonlarý */
+.btn-floating {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-color: rgba(255,255,255,0.2);
+}
+
+    .btn-floating:hover {
+        background-color: #e63946;
+        border-color: #e63946;
+    }
+
+/* --- YÖNETÝCÝ MENÜSÜ TASARIMI --- */
+
+/* Giriþ Yapýlýnca Çýkan Altýn Buton */
+.btn-admin-glow {
+    background: linear-gradient(45deg, #FFD700, #FDB931); /* Altýn Gradyan */
+    border: none;
+    color: #343a40 !important; /* Koyu yazý */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); /* Hafif Altýn Iþýk */
+    transition: all 0.3s ease;
+}
+
+    .btn-admin-glow:hover {
+        background: linear-gradient(45deg, #FDB931, #FFD700);
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Iþýk Güçlenir */
+    }
+
+/* Dropdown Menü Animasyonu (Zarif Açýlýþ) */
+.animate-dropdown {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Menü açýkken (Bootstrap 'show' sýnýfý eklediðinde) */
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Menü Linkleri */
+.dropdown-item {
+    transition: all 0.2s;
+    border-radius: 5px;
+    margin: 2px 5px;
+    width: auto;
+}
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+        transform: translateX(5px); /* Hafif saða kayma */
+        color: #e63946; /* Marka kýrmýzýsý */
+    }
+
+/* --- GÝRÝÞ YAPILMAMIÞ (CAM EFEKTLÝ) BUTON --- */
+.btn-glass-login {
+    background: rgba(255, 255, 255, 0.1); /* Hafif þeffaf beyaz */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Ýnce çerçeve */
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Ýkon ile yazý arasý boþluk */
+    backdrop-filter: blur(5px); /* Arkasýný bulanýklaþtýr (Buzlu Cam) */
+    transition: all 0.3s ease;
+    padding-left: 5px !important; /* Ýkon için soldan biraz kýs */
+}
+
+    /* Ýkonun Olduðu Yuvarlak Kutu */
+    .btn-glass-login .icon-box {
+        background: rgba(255, 255, 255, 0.2);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    /* Üzerine Gelince (Hover) */
+    .btn-glass-login:hover {
+        background: #ffffff; /* Tam beyaz ol */
+        color: #1a1a1a !important; /* Yazý koyu olsun */
+        transform: translateY(-2px); /* Hafif yukarý kalk */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Beyaz ýþýk yay */
+        border-color: #fff;
+    }
+
+        /* Üzerine Gelince Ýkon Hareketi */
+        .btn-glass-login:hover .icon-box {
+            background: #e63946; /* Ýkon arka planý kýrmýzý olsun */
+            color: white;
+            transform: rotate(15deg); /* Hafifçe dönme efekti */
+        }
+/* --- CYBER / NEON GÝRÝÞ BUTONU --- */
+.btn-cyber-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.05); /* Çok hafif þeffaf */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Ýnce gri çerçeve */
+    border-radius: 50px; /* Tam oval */
+    overflow: hidden; /* Iþýk dýþarý taþmasýn */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Yaylanma efekti */
+}
+
+    /* Yazý Stili */
+    .btn-cyber-login .text-wrapper {
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+        z-index: 2; /* Iþýðýn üstünde kalsýn */
+    }
+
+    /* Ýkon Kutusu */
+    .btn-cyber-login .icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: #fff;
+        transition: all 0.4s ease;
+        z-index: 2;
+    }
+
+    /* --- HOVER (ÜZERÝNE GELÝNCE) EFEKTLERÝ --- */
+
+    /* 1. Butonun kendisi parlasýn ve kenarý renklensin */
+    .btn-cyber-login:hover {
+        border-color: #e63946; /* Marka kýrmýzýsý çerçeve */
+        background: rgba(230, 57, 70, 0.1); /* Hafif kýrmýzý zemin */
+        box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); /* Kýrmýzý Neon Iþýðý */
+        transform: translateY(-2px); /* Hafif yukarý kalksýn */
+    }
+
+        /* 2. Ýkon Kýrmýzýya Dönsün ve Dönsün */
+        .btn-cyber-login:hover .icon-wrapper {
+            background: #e63946;
+            color: white;
+            transform: rotate(360deg); /* Tam tur dönsün */
+        }
+
+/* 3. SHINE (IÞIK HUZMESÝ) ANÝMASYONU */
+.shine-effect {
+    position: absolute;
+    top: 0;
+    left: -100%; /* Solda gizli baþla */
+    width: 50%;
+    height: 100%;
+    background: linear-gradient( to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100% );
+    transform: skewX(-25deg); /* Iþýðý eðik yap */
+    z-index: 1;
+    transition: none;
+}
+
+.btn-cyber-login:hover .shine-effect {
+    animation: shine-sweep 0.7s forwards; /* Tek seferlik oynat */
+}
+
+/* Iþýðýn Soldan Saða Kayma Animasyonu */
+@keyframes shine-sweep {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+/* --- DÝÐER CSS AYARLARI (NAVBAR VS.) --- */
+/* (Bunlar zaten varsa tekrar eklemene gerek yok ama garanti olsun diye veriyorum) */
+.custom-navbar {
+    background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+    padding: 15px 0;
+}
+
+.nav-hover {
+    color: rgba(255,255,255,0.7) !important;
+    position: relative;
+    transition: color 0.3s;
+    margin-right: 15px;
+}
+
+    .nav-hover:hover {
+        color: #fff !important;
+    }
+
+.custom-footer {
+    background-color: #1a1a1a;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.footer-link:hover {
+    color: #e63946 !important;
+    transform: translateX(5px);
+}
+/* TÜM SÝTE ÝÇÝN MODERN ARKA PLAN DÜZENLEMESÝ */
+body {
+    background-color: #f8fafc; /* Hafif kýrýk beyaz temel */
+    background-image: radial-gradient(at 0% 0%, rgba(230, 57, 70, 0.03) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.03) 0px, transparent 50%), radial-gradient(at 50% 100%, rgba(230, 57, 70, 0.02) 0px, transparent 50%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+/* Sayfa geçiþlerinde içeriklerin daha þýk durmasý için ana konteynere hafif gölge */
+main[role="main"] {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    border-radius: 30px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Kartlarýn beyaz zeminde daha belirgin olmasý için */
+.card, .glass-card-about, .feature-card {
+    border: none !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+    .card:hover {
+        transform: translateY(-10px) !important;
+        box-shadow: 0 20px 40px rgba(230, 57, 70, 0.1) !important;
+    }

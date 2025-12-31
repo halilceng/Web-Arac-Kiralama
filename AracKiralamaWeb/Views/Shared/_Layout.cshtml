@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RoyalDrive</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AracKiralamaWeb.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark custom-navbar box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span style="font-size: 1.5rem; margin-right: 8px;">🚗</span>
+                    Royal<span class="text-danger">Drive</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                    <ul class="navbar-nav flex-grow-1 ms-4">
+                        <li class="nav-item">
+                            <a class="nav-link nav-hover" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-hover" asp-area="" asp-controller="Arac" asp-action="Index">Araç Listesi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-hover" asp-area="" asp-controller="Home" asp-action="Hakkimizda">Hakkımızda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-hover" asp-area="" asp-controller="Home" asp-action="Iletisim">İletişim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-hover" asp-area="" asp-controller="Home" asp-action="SSS">SSS</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav align-items-center">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle btn btn-admin-glow px-3 rounded-pill fw-bold text-dark"
+                                   href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    👑 Yönetici Paneli
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Arac" asp-action="Dashboard">📊 Performans</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Arac" asp-action="Kiralamalar">📅 Kiralamalar</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Arac" asp-action="Create">➕ Yeni Araç</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger fw-bold" asp-controller="Auth" asp-action="Logout">🚪 Çıkış</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-2">
+                                <a class="btn-cyber-login" asp-area="" asp-controller="Auth" asp-action="Login">
+                                    <span class="icon-wrapper"><i class="fas fa-user-shield"></i></span>
+                                    <span class="text-wrapper">Admin Girişi</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="custom-footer mt-5">
+        <div class="container py-5">
+            <div class="row text-center text-md-start">
+                <div class="col-md-4">
+                    <h5 class="text-danger fw-bold" style="letter-spacing: 2px;">🚗 ROYALDRIVE</h5>
+                    <p class="text-white-50 small">Güvenli ve konforlu yolculuğun adresi. Profesyonel filo yönetimi ile yanınızdayız.</p>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="text-warning fw-bold mb-4">DESTEK</h6>
+                    <p class="small"><a asp-action="SSS" class="text-white-50 text-decoration-none">SSS</a></p>
+                    <p class="small"><a asp-action="Iletisim" class="text-white-50 text-decoration-none">İletişim</a></p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-warning fw-bold mb-4">BİZE ULAŞIN</h6>
+                    <p class="small text-white-50"><i class="fas fa-phone me-2 text-danger"></i> +90 212 555 00 00</p>
+                    <p class="small text-white-50"><i class="fas fa-envelope me-2 text-danger"></i> info@royaldrive.com</p>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-warning fw-bold mb-4">SOSYAL MEDYA</h6>
+                    <div class="d-flex justify-content-center justify-content-md-start">
+                        <a href="#" class="btn btn-outline-danger btn-sm me-2 rounded-circle shadow-sm"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-danger btn-sm rounded-circle shadow-sm"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4 border-secondary opacity-25">
+
+            <div class="text-center text-white-50 small">
+                © 2025 Tüm Hakları Saklıdır: <strong>RoyalDrive</strong>
+            </div>
+
+            <div class="text-center mt-2">
+                <small style="color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 1px;">
+                    Designed & Developed by <span style="color: #e63946; font-weight: bold;">Halil Işık</span>
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

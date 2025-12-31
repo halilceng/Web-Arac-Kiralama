@@ -1,0 +1,73 @@
+﻿@model List<AracKiralamaWeb.Models.Kiralama>
+
+@{
+    ViewData["Title"] = "Kiralama Hareketleri";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📂 Kiralama Kayıtları</h2>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-warning text-center">
+            Henüz hiç kiralama yapılmamış.
+        </div>
+    }
+    else
+    {
+        <div class="card shadow">
+            <div class="card-body">
+                <table class="table table-hover table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Araç</th>
+                            <th>Plaka</th>
+                            <th>Başlangıç</th>
+                            <th>Bitiş</th>
+                            <th>Toplam Tutar</th>
+                            <th>Durum</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var kiralama in Model)
+                        {
+                            <tr>
+                                <td>@kiralama.Arac?.MarkaModel</td>
+                                <td><span class="badge bg-secondary">@kiralama.Arac?.Plaka</span></td>
+                                <td>@kiralama.BaslangicTarihi.ToString("dd.MM.yyyy")</td>
+                                <td>@kiralama.BitisTarihi.ToString("dd.MM.yyyy")</td>
+                                <td class="fw-bold text-success">@kiralama.ToplamTutar TL</td>
+                                <td>
+                                    @if (DateTime.Now > kiralama.BitisTarihi)
+                                    {
+                                        <span class="badge bg-secondary">Tamamlandı</span>
+                                    }
+                                    else if (DateTime.Now >= kiralama.BaslangicTarihi)
+                                    {
+                                        <span class="badge bg-success">Aktif Kirada 🟢</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">Rezerve 🟡</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="KiralamaIptal" asp-route-id="@kiralama.Id"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu kiralamayı iptal etmek istediğinize emin misiniz? Araç tekrar boşa çıkacak.');">
+                                        X İptal
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-outline-primary">Araç Listesine Dön</a>
+    </div>
+</div>

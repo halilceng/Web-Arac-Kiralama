@@ -1,0 +1,148 @@
+﻿@model AracKiralamaWeb.Models.Arac
+
+@{
+    ViewData["Title"] = "Yeni Araç Ekle";
+}
+
+<style>
+    /* ... (Eski CSS kodların aynen kalabilir veya buradakini kullanabilirsin) ... */
+    .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-header-custom {
+        background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+        padding: 30px;
+        color: white;
+        text-align: center;
+        border-bottom: 5px solid #e63946;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 12px 15px;
+    }
+
+    .btn-save {
+        background: linear-gradient(45deg, #11998e, #38ef7d);
+        border: none;
+        color: white;
+        font-weight: bold;
+    }
+
+        .btn-save:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 239, 125, 0.4);
+            color: white;
+        }
+
+    /* YENİ: Dosya Yükleme Alanı Tasarımı */
+    .file-upload-wrapper {
+        position: relative;
+        border: 2px dashed #ddd;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s;
+        background: #f8f9fa;
+        cursor: pointer;
+    }
+
+        .file-upload-wrapper:hover {
+            border-color: #e63946;
+            background: #fff5f5;
+        }
+
+    .file-upload-icon {
+        font-size: 2rem;
+        color: #e63946;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container mt-5 mb-5 fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="glass-card">
+                <div class="card-header-custom">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🚘</div>
+                    <h3 class="fw-bold mb-0">Garaja Yeni Araç Ekle</h3>
+                </div>
+
+                <div class="card-body p-5">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">MARKA & MODEL</label>
+                                <input asp-for="MarkaModel" class="form-control" placeholder="Örn: Mercedes C200" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">PLAKA</label>
+                                <input asp-for="Plaka" class="form-control" placeholder="34 YZ 123" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-muted">GÜNLÜK FİYAT (TL)</label>
+                            <input asp-for="GunlukFiyat" type="number" class="form-control" placeholder="2500" required />
+                        </div>
+
+                        <div class="mb-5">
+                            <label class="form-label fw-bold small text-muted">ARAÇ GÖRSELİ</label>
+                            <div class="file-upload-wrapper" onclick="document.getElementById('resimInput').click()">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <h6 class="fw-bold text-dark">Resim Seçmek İçin Tıklayın</h6>
+                                <p class="text-muted small mb-0">veya dosyayı buraya sürükleyin (JPG, PNG)</p>
+
+                                <input type="file" name="resimDosyasi" id="resimInput" class="d-none" accept="image/*" onchange="previewImage(this)" />
+                            </div>
+                            <div id="previewArea" class="mt-3 text-center d-none">
+                                <img id="imgPreview" src="#" alt="Önizleme" style="max-height: 200px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" />
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-save btn-lg py-3 rounded-pill shadow">
+                                <i class="fas fa-check-circle me-2"></i> KAYDET VE YAYINLA
+                            </button>
+                            <a asp-action="Index" class="btn btn-light border py-2 rounded-pill">Vazgeç</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imgPreview').src = e.target.result;
+                document.getElementById('previewArea').classList.remove('d-none');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

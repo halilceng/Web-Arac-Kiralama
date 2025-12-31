@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<style>
+    /* 1. HERO SECTION - PREMİUM GÖRÜNÜM */
+    .hero-section {
+        position: relative;
+        background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=90');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 120px 0;
+        color: white;
+        text-align: center;
+        border-radius: 0 0 50px 50px;
+        margin-top: -25px; /* Menüyle birleşme */
+    }
+
+    .ls-2 {
+        letter-spacing: 2px;
+    }
+
+    /* 2. BUTON TASARIMI */
+    .btn-premium {
+        background: linear-gradient(45deg, #e63946, #ff4d4d);
+        color: white;
+        border: none;
+        transition: 0.4s;
+        box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+    }
+
+        .btn-premium:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(230, 57, 70, 0.5);
+            color: white;
+        }
+
+    /* 3. İSTATİSTİK VE KARTLAR */
+    .feature-card {
+        background: rgba(255, 255, 255, 0.03); /* Çok hafif transparan */
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+            border-color: #e63946;
+        }
+
+    /* 4. CTA (Harekete Geçirici Mesaj) BÖLÜMÜ */
+    .cta-section {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .cta-bg-glow {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(230, 57, 70, 0.1);
+        filter: blur(100px);
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    .glow-1 {
+        top: -100px;
+        left: -100px;
+    }
+
+    .glow-2 {
+        bottom: -100px;
+        right: -100px;
+    }
+
+    /* 5. ANİMASYONLAR */
+    .fade-in-up {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="hero-section shadow-lg mb-5 fade-in-up">
+    <div class="container py-5">
+        <h5 class="text-uppercase ls-2 text-danger fw-bold mb-3">Sınırları Zorla</h5>
+        <h1 class="display-1 fw-bold mb-4">Yolculuk Başlasın</h1>
+        <p class="lead fs-4 mb-5 text-light opacity-75 col-md-8 mx-auto">
+            Hayalindeki aracı kiralamak hiç bu kadar kolay olmamıştı. <br>
+            Güvenli, hızlı ve ekonomik çözümlerle her zaman yanındayız.
+        </p>
+
+        <a href="/Arac/Index" class="btn btn-premium btn-lg px-5 py-3 fw-bold rounded-pill fs-5">
+            ARAÇLARI İNCELE <span class="ms-2">&rarr;</span>
+        </a>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5 fade-in-up" style="animation-delay: 0.2s;">
+    <div class="row text-center g-4">
+        <div class="col-md-3 col-6">
+            <h2 class="fw-bold text-primary display-5">50+</h2>
+            <p class="text-muted fw-bold small uppercase">Araç Seçeneği</p>
+        </div>
+        <div class="col-md-3 col-6">
+            <h2 class="fw-bold text-success display-5">7/24</h2>
+            <p class="text-muted fw-bold small uppercase">Canlı Destek</p>
+        </div>
+        <div class="col-md-3 col-6">
+            <h2 class="fw-bold text-danger display-5">15 dk</h2>
+            <p class="text-muted fw-bold small uppercase">Hızlı Teslimat</p>
+        </div>
+        <div class="col-md-3 col-6">
+            <h2 class="fw-bold text-warning display-5">1000+</h2>
+            <p class="text-muted fw-bold small uppercase">Mutlu Müşteri</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5 container text-muted opacity-25">
+
+<div class="container mb-5 fade-in-up" style="animation-delay: 0.4s;">
+    <div class="text-center mb-5">
+        <h6 class="text-danger fw-bold text-uppercase ls-2">AVANTAJLARIMIZ</h6>
+        <h2 class="fw-bold display-6">Neden Bizi Seçmelisiniz?</h2>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card h-100 shadow-sm p-4 text-center rounded-4 border-0">
+                <div class="card-body">
+                    <div class="display-4 mb-3">💸</div>
+                    <h4 class="card-title fw-bold">Ekonomik Fiyatlar</h4>
+                    <p class="card-text text-muted">
+                        Piyasadaki en rekabetçi fiyatlarla bütçenizi sarsmadan lüksü yaşayın.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card feature-card h-100 shadow-sm p-4 text-center rounded-4 border-0">
+                <div class="card-body">
+                    <div class="display-4 mb-3">🛡️</div>
+                    <h4 class="card-title fw-bold">Tam Güvence</h4>
+                    <p class="card-text text-muted">
+                        Tüm araçlarımız tam kapsamlı kaskolu. Yolda kalma derdi yok, biz yanınızdayız.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card feature-card h-100 shadow-sm p-4 text-center rounded-4 border-0">
+                <div class="card-body">
+                    <div class="display-4 mb-3">🧼</div>
+                    <h4 class="card-title fw-bold">Hijyenik Araçlar</h4>
+                    <p class="card-text text-muted">
+                        Her kiralama öncesi detaylı temizlik ve dezenfeksiyon işlemi uygulanır.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5 fade-in-up" style="animation-delay: 0.6s;">
+    <div class="cta-section text-white p-5 text-center rounded-5 shadow-lg position-relative overflow-hidden">
+        <div class="cta-bg-glow glow-1"></div>
+        <div class="cta-bg-glow glow-2"></div>
+
+        <div class="position-relative z-1">
+            <h2 class="fw-bold display-5 mb-3 text-uppercase ls-2">Hala Bekliyor musun?</h2>
+            <p class="lead text-white-50 mb-4 fs-4">Hayalindeki arabayı başkası kapmadan hemen ayırt, yola çık!</p>
+            <a href="/Arac/Index" class="btn btn-premium btn-lg px-5 py-3 rounded-pill fw-bold fs-5 shadow">
+                Hemen Kirala <span class="ms-2">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</div>

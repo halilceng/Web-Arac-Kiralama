@@ -1,0 +1,167 @@
+﻿@{
+    ViewData["Title"] = "Sıkça Sorulan Sorular";
+}
+
+<style>
+    .faq-wrapper {
+        background-color: #f8f9fa;
+        padding: 80px 0;
+    }
+
+    .faq-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+        .faq-header h2 {
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 2.5rem;
+        }
+
+    /* ACCORDION TASARIMI */
+    .accordion-item {
+        border: none;
+        margin-bottom: 15px;
+        border-radius: 15px !important;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: 0.3s;
+    }
+
+        .accordion-item:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+    .accordion-button {
+        font-weight: 700;
+        color: #0f172a;
+        padding: 20px 25px;
+        font-size: 1.1rem;
+        border: none !important;
+        background-color: #fff !important;
+    }
+
+        .accordion-button:not(.collapsed) {
+            color: #e63946;
+            background-color: #fff !important;
+            box-shadow: none;
+        }
+
+        .accordion-button::after {
+            background-size: 1rem;
+        }
+
+    .accordion-body {
+        padding: 25px;
+        color: #64748b;
+        line-height: 1.6;
+        background-color: #fff;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    /* SOL TARAF İKONLU ALAN */
+    .faq-sidebar {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 30px;
+        height: 100%;
+    }
+
+    .support-icon {
+        font-size: 3rem;
+        color: #e63946;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="faq-wrapper">
+    <div class="container">
+        <div class="faq-header">
+            <h6 class="text-danger fw-bold text-uppercase ls-2">Destek Merkezi</h6>
+            <h2>Sıkça Sorulan Sorular</h2>
+            <div class="mx-auto mt-3" style="width: 60px; height: 4px; background: #e63946; border-radius: 2px;"></div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-lg-4">
+                <div class="faq-sidebar shadow-lg">
+                    <div class="support-icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="fw-bold mb-3">Başka bir sorunuz mu var?</h3>
+                    <p class="opacity-75 mb-4">Aradığınız cevabı bulamadıysanız, profesyonel destek ekibimiz size yardımcı olmaktan mutluluk duyacaktır.</p>
+                    <a href="/Home/Iletisim" class="btn btn-danger w-100 py-3 rounded-pill fw-bold">BİZE ULAŞIN</a>
+
+                    <div class="mt-5">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-phone-alt me-3 text-danger"></i>
+                            <span>+90 (555) 000 00 00</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-envelope me-3 text-danger"></i>
+                            <span>destek@arackiralama.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <i class="fas fa-id-card me-3 text-danger"></i> Kiralama için hangi belgelere ihtiyacım var?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Araç kiralamak için geçerli bir sürücü belgesi (en az 2 yıllık), nüfus cüzdanı veya pasaport ve sürücü adına kayıtlı bir kredi kartı gerekmektedir. Yabancı ehliyetler için noter onaylı tercüme talep edilebilir.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                <i class="fas fa-user-clock me-3 text-danger"></i> Minimum yaş sınırı nedir?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Ekonomik sınıf araçlar için minimum 21 yaş ve 2 yıllık ehliyet, orta ve üst segment araçlar için 25 yaş ve 5 yıllık ehliyet, lüks araçlar için ise 28 yaş sınırı bulunmaktadır.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                <i class="fas fa-shield-alt me-3 text-danger"></i> Sigorta neleri kapsıyor?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Tüm araçlarımız "Muafiyetli Kaza Sigortası" ile kiralanmaktadır. Lastik, cam ve far hasarları gibi durumlar için ek güvence paketlerimizi kiralama esnasında satın alabilirsiniz.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                <i class="fas fa-gas-pump me-3 text-danger"></i> Yakıt politikası nasıl işliyor?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Araçlarımızı genellikle "Aynı Seviye Teslim" politikasıyla veriyoruz. Yani aracı hangi seviyede yakıtla aldıysanız, aynı seviyede teslim etmeniz beklenir. Eksik yakıtla teslimlerde hizmet bedeli uygulanır.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

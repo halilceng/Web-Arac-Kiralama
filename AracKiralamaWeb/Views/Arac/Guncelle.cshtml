@@ -1,0 +1,45 @@
+﻿@model AracKiralamaWeb.Models.Arac
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">Araç Bilgilerini Düzenle</h4>
+                </div>
+                <div class="card-body">
+
+                    <form asp-action="Guncelle" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label>Marka ve Model:</label>
+                            <input asp-for="MarkaModel" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Plaka:</label>
+                            <input asp-for="Plaka" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Günlük Fiyat (TL):</label>
+                            <input asp-for="GunlukFiyat" type="number" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Resim Linki (URL):</label>
+                            <input asp-for="ResimUrl" class="form-control" required />
+                        </div>
+
+                        <button type="submit" class="btn btn-warning w-100">Değişiklikleri Kaydet</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-secondary">İptal Et ve Dön</a>
+            </div>
+        </div>
+    </div>
+</div>

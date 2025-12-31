@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Yönetici Girişi";
+    Layout = null; /* Bu sayfada standart menü ve footer olmasın, tam ekran görünsün */
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yönetici Girişi - AracKiralamaPro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* 1. ARKA PLAN VE GENEL YAPI */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); /* Lüks Araç Arka Planı */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 2. GİRİŞ KARTI (BUZLU CAM) */
+        .login-card {
+            background: rgba(255, 255, 255, 0.1); /* Şeffaf Beyaz */
+            backdrop-filter: blur(15px); /* Buzlu Cam Efekti */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            text-align: center;
+            animation: fadeInDown 1s ease;
+        }
+
+        /* 3. BAŞLIK VE İKON */
+        .login-icon {
+            font-size: 3rem;
+            color: #e63946; /* Marka Kırmızısı */
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+
+        h2 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* 4. MODERN INPUT ALANLARI */
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+            .input-group i {
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #ccc;
+                transition: 0.3s;
+            }
+
+        .form-control-custom {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding: 10px 10px 10px 40px; /* İkon için soldan boşluk */
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+            /* Input'a tıklanınca */
+            .form-control-custom:focus {
+                border-bottom-color: #e63946;
+            }
+
+                .form-control-custom:focus + i {
+                    color: #e63946;
+                }
+
+        /* Placeholder Rengi */
+        ::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* 5. GİRİŞ BUTONU */
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #e63946, #c1272d);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+            margin-bottom: 20px;
+        }
+
+            .btn-login:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(230, 57, 70, 0.6);
+                background: linear-gradient(45deg, #ff4d4d, #e63946);
+            }
+
+        /* 6. GERİ DÖN LİNKİ */
+        .back-link {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+            .back-link:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+
+        /* Animasyon */
+        @@keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hata Mesajı Kutusu */
+        .alert-custom {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.5);
+            color: #ffcccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="login-icon">
+            <i class="fas fa-user-shield"></i>
+        </div>
+
+        <h2>Yönetici Paneli</h2>
+
+        @if (ViewBag.Hata != null)
+        {
+            <div class="alert-custom">
+                <i class="fas fa-exclamation-circle me-2"></i> @ViewBag.Hata
+            </div>
+        }
+
+        <form asp-action="Login" method="post">
+
+            <div class="input-group">
+                <input type="text" name="kadi" class="form-control-custom" placeholder="Kullanıcı Adı" required autocomplete="off">
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="sifre" class="form-control-custom" placeholder="Şifre" required>
+                <i class="fas fa-lock"></i>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Giriş Yap <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+
+        </form>
+
+        <a href="/Home/Index" class="back-link">
+            <i class="fas fa-chevron-left me-1"></i> Siteye Geri Dön
+        </a>
+    </div>
+
+</body>
+</html>
